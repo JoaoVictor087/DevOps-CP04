@@ -34,5 +34,9 @@ docker compose --file compose.yaml up --build
 localhost:8081/hello
 ```
 
+### Imagem da arquitetura do projeto
+<img width="831" height="761" alt="Diagrama-cp4-Devops" src="https://github.com/user-attachments/assets/24f4897a-6814-4085-aebd-b8bc64fe3c46" />
+
+
 
 
