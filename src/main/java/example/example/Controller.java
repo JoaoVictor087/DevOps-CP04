@@ -10,12 +10,13 @@ public class Controller {
     public String helloWorld(){
         return """
                 Hello World \n
-                
+               \s
                  Integrantes: \n
-                
+               \s
                  João Victor Alves da Silva: RM559726 \n
-                
-                 Vinicius Kenzo Tocuyosi: RM559982""";
+                 Vinicius Kenzo Tocuyosi: RM559982 \n
+                 Juan Pablo Rebelo Coelho RM:560445
+                \s""";
     }
     @GetMapping("/health")
     public String health(){
