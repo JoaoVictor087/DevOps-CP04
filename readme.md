@@ -18,7 +18,7 @@ git clone https://github.com/JoaoVictor087/DevOps-CP04.git
 ### 2º Passo
 #### Entre no diretório
 ```
-    cd /DevOps-CP04
+cd /DevOps-CP04
 ```
 
 ### 3º Passo
@@ -33,5 +33,6 @@ docker compose --file compose.yaml up --build
 ```
 localhost:8081/hello
 ```
+
 
 
