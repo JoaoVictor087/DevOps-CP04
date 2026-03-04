@@ -1,3 +1,5 @@
 spring:
   application:
     name: example
+server:
+  port: 8081
