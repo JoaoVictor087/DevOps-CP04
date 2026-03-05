@@ -7,17 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
     @GetMapping("/hello")
-    public String helloWorld(){
-        return """
-                Hello World \n
-               \s
-                 Integrantes: \n
-               \s
-                 João Victor Alves da Silva: RM559726 \n
-                 Vinicius Kenzo Tocuyosi: RM559982 \n
-                 Juan Pablo Rebelo Coelho RM:560445
-                \s""";
+    public String hello() {
+        return "OK";
     }
+
     @GetMapping("/health")
     public String health(){
         return "Está saudável!";

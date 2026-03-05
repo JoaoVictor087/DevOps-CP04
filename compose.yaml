@@ -1,34 +1,49 @@
 services:
   db:
-    image: 'postgres:latest'
-    restart: always
+    image: 'postgres:16-alpine'
+    container_name: db
+    restart: unless-stopped
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_DB: cp04database
+      POSTGRES_PASSWORD: cp04password
+      POSTGRES_USER: cp04user
+    networks:
+      - cp04network
     ports:
       - '5432:5432'
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U myuser -d mydatabase" ]
+      test: [ "CMD-SHELL", "pg_isready -U cp04user -d cp04database" ]
       interval: 5s
       timeout: 5s
       retries: 5
-      start_period: 10s
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   api:
-    build:
-      dockerfile: Dockerfile
-    container_name: spring-api
+    build: .
+    container_name: cp04-api
     ports:
-      - "8081:8081"
+      - "8080:8080"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    networks:
+      - cp04network
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydatabase
-      SPRING_DATASOURCE_USERNAME: myuser
-      SPRING_DATASOURCE_PASSWORD: secret
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cp04database
+      SPRING_DATASOURCE_USERNAME: cp04user
+      SPRING_DATASOURCE_PASSWORD: cp04password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
+      test: [ "CMD", "curl", "-f", "http://127.0.0.1:8080/hello" ]
+      interval: 15s
+      timeout: 10s
+      retries: 6
+      start_period: 60s
+
+networks:
+  cp04network:
+    driver: bridge
+
+volumes:
+  pgdata:
