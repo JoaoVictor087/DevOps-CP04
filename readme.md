@@ -31,7 +31,7 @@ docker compose --file compose.yaml up --build
 ### 4º Passo
 #### Teste a aplicação na web
 ```
-localhost:8081/hello
+localhost:8080/hello
 ```
 
 ### Imagem da arquitetura do projeto
