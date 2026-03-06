@@ -16,5 +16,7 @@ public class Entity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String nome;
+
     private Long nota;
 }
